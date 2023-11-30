@@ -15,21 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HW8 Main.cpp">
+    <ClCompile Include="HW9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HW8FunctionRecursion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HW8FunctionCycle.cpp">
+    <ClCompile Include="Functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HW8HeaderRecursion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HW8HeaderCycles.h">
+    <ClInclude Include="Functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
