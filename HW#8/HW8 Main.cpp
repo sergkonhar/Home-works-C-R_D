@@ -1,27 +1,20 @@
-
-
 #include <iostream>
 #include "HW8HeaderRecursion.h"
 #include "HW8HeaderCycles.h"
 
 int main()
 {
- 
 	int valuesToRead = 3;
-
 	countValues(valuesToRead);
 	
 	
-    int countForFactorial = 7;
-	
+    int countForFactorial = 7;	
+
     int resultFactorial = recurtionFactorial(countForFactorial);
+	std::cout << "\nFactorial from recursion: " << resultFactorial;	
 
-	std::cout << "\nFactorial from recursion: " << resultFactorial;
-	
 	int resultCycle = cycleFactorial(countForFactorial);
-
 	std::cout << "\nFactorial from cycle: " << resultCycle;
-	
 	
 	int countForNaturalNumbers = 5;
 
