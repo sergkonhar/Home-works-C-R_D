@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 
 void  stringCharUppercaser(char inputChar[]);
 void  intTransformer(int inputNum[], int length);
