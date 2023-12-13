@@ -27,7 +27,7 @@ void  intTransformer(int inputNum[],int length)
 bool isPalindrome(char palindromeArray[])
 {
 	int fullStrLength = strlen(palindromeArray);
-	int halfStrLength = std::ceil(fullStrLength / 2.f)-1;
+	int halfStrLength = fullStrLength / 2;
 	for (int i = 0; i <= halfStrLength; i++)
 	{
 		if (palindromeArray[i] != palindromeArray[(fullStrLength - 1) - i]) {
