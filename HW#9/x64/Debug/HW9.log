@@ -1,0 +1,4 @@
+﻿  Functions.cpp
+C:\Users\sergk\source\repos\HW9\Functions.cpp(29,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW9\Functions.cpp(30,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  HW9.vcxproj -> C:\Users\sergk\source\repos\Task#1\x64\Debug\HW9.exe
