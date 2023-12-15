@@ -65,7 +65,7 @@ int main()
 		}
 
 		else if (mainModeChoise == "2")
-		{
+		{ 
 			std::cout << std::endl;
 			std::cout << "!!!Word of the Day Mode!!!";
 			std::string lastWinDate = readSavedData(saveDataToFile);
@@ -85,13 +85,8 @@ int main()
 		}
 		int currentAttemptsCounter = maxAttempts;
 
-		std::cout << std::endl;
-		std::cout << guessWord;
-		std::cout << std::endl;
-
 		std::string usedUnmatchLetters = "";
 		printGameStartedMenu(maxAttempts);
-
 
 		while (true)
 		{
@@ -166,7 +161,7 @@ void printMainMenu()
 
 void printGameStartedMenu(int attempts)
 {
-	std::cout << std::endl << std::endl;
+	std::cout << std::endl;
 	std::cout << "Yor word generated try to guess it in " << attempts << " attempts" << std::endl;
 	std::cout << "To start game enter your guess" << std::endl;
 	std::cout << "To return to presious menu enter 0" << std::endl;
