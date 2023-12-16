@@ -5,6 +5,12 @@
 #include <algorithm>
 #include <ctime>
 
+enum class readParameters
+{
+	Date,
+	Word,
+	Status
+};
 
 void printMainMenu();
 void printGameStartedMenu(int attempts);
@@ -18,16 +24,16 @@ void printNewRoundMenu(std::string inputString, std::string resultAfterGuess, st
 void printWinMenu(std::string guessWord, const int maxAttempts, int currentAttemptsCounter);
 void printlossMenu(std::string guessWord);
 void printError(std::string errors);
-std::string readSavedData(std::string saveDataToFile);
+std::string readSavedData(std::string saveDataToFile, readParameters parameterToRead);
 std::string getCurrentDate();
-void writeSaveData(std::string winDate, const std::string saveDataToFile);
+void writeSaveData(std::string date, std::string word, std::string status, const std::string saveDataToFile);
 
 int main()
 {
 	const int usualWordsCount = 212;
 	const int wordsOfTheDayCount = 219;
 	const int wordLength = 5;
-	const int maxAttempts = 5;
+	const int maxAttempts = 10;
 
 	const std::string usualWordsFile = "UsualWords.txt";
 	const std::string wordOfTheDayFile = "DayWord.txt";
@@ -46,6 +52,7 @@ int main()
 
 
 		std::string guessWord = "";
+		std::string wordOfTheDayGuessStatus = "false";
 
 		if (mainModeError != "")
 		{
@@ -65,21 +72,31 @@ int main()
 		}
 
 		else if (mainModeChoise == "2")
-		{ 
+		{
 			std::cout << std::endl;
 			std::cout << "!!!Word of the Day Mode!!!";
-			std::string lastWinDate = readSavedData(saveDataToFile);
+			std::string gameDate = readSavedData(saveDataToFile, readParameters::Date);
 
-			if (lastWinDate == today)
+			if (gameDate == today)
 			{
-				std::cout << std::endl;
-				std::cout << "The Word of the day alredy guessed return tomorrow";
-				std::cout << std::endl;
-				continue;
+				std::string gameStatus = readSavedData(saveDataToFile, readParameters::Status);
+				if (gameStatus == "true")
+				{
+					std::cout << std::endl;
+					std::cout << "The Word of the day alredy guessed return tomorrow";
+					std::cout << std::endl;
+					continue;
+				}
+				else
+				{
+					guessWord = readSavedData(saveDataToFile, readParameters::Word);
+				}
 			}
 			else
 			{
+				
 				guessWord = generateWord(wordOfTheDayFile, wordsOfTheDayCount, wordLength);
+				writeSaveData(today, guessWord, wordOfTheDayGuessStatus, saveDataToFile);
 			}
 
 		}
@@ -87,7 +104,7 @@ int main()
 
 		std::string usedUnmatchLetters = "";
 		printGameStartedMenu(maxAttempts);
-
+	
 		while (true)
 		{
 			if (currentAttemptsCounter == 0)
@@ -139,7 +156,8 @@ int main()
 					printWinMenu(guessWord, maxAttempts, currentAttemptsCounter);
 					if (mainModeChoise == "2")
 					{
-						writeSaveData(today, saveDataToFile);
+						wordOfTheDayGuessStatus = "true";
+						writeSaveData(today, guessWord, wordOfTheDayGuessStatus, saveDataToFile);
 					}
 					break;
 				}
@@ -227,7 +245,7 @@ std::string generateWord(const std::string WordsFile, const int WordsCount, cons
 
 	std::fstream inputFile;
 	inputFile.open(WordsFile, std::ios::in);
-	
+
 	if (!inputFile)
 	{
 		std::cout << "Critical Error File With Words Not Found";
@@ -347,18 +365,39 @@ void printError(std::string errors)
 	std::cout << std::endl;
 }
 
-std::string readSavedData(std::string saveDataToFile)
+std::string readSavedData(std::string saveDataToFile, readParameters parameterToRead)
 {
-	std::string winDate = "";
+	std::string stringData = "";
 	std::fstream inputFile;
 	inputFile.open(saveDataToFile, std::ios::in);
-	if (!inputFile) 
+	if (!inputFile)
 	{
-		std::cout << "Critical Error File With Words Not Found";
+		std::cout << "Critical Error File With Save Not Found";
 		return "";
 	}
-	inputFile >> winDate;
-	return winDate;
+	else if (parameterToRead == readParameters::Date)
+	{
+		inputFile >> stringData;
+		inputFile.close();
+		return stringData;
+	}
+	else if (parameterToRead == readParameters::Word)
+	{
+		inputFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		inputFile >> stringData;
+		inputFile.close();
+		return stringData;
+
+
+	}
+	else if (parameterToRead == readParameters::Status)
+	{
+		inputFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		inputFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		inputFile >> stringData;
+		inputFile.close();
+		return stringData;
+	}
 }
 
 std::string getCurrentDate()
@@ -373,7 +412,7 @@ std::string getCurrentDate()
 	return currentDate;
 }
 
-void writeSaveData(std::string winDate, const std::string saveDataToFile)
+void writeSaveData(std::string date, std::string word, std::string status, const std::string saveDataToFile)
 {
 	std::fstream outputFile;
 	outputFile.open(saveDataToFile, std::ios::out);
@@ -381,5 +420,14 @@ void writeSaveData(std::string winDate, const std::string saveDataToFile)
 	{
 		std::cout << "Critical Error File With Save Not Found";
 	}
-	outputFile << winDate;
+	else 
+	{
+		outputFile << date;
+		outputFile << "\n";
+		outputFile << word;
+		outputFile << "\n";
+		outputFile << status;
+		outputFile << "\n";
+		outputFile.close();
+	}
 }
