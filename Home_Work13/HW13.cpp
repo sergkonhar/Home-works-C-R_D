@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <ctime>
 
-enum class readParameters
+enum class readParameters //defines which string to read from save file
 {
 	Date,
 	Word,
@@ -19,10 +19,10 @@ std::string gameModeErrors(std::string inputString, int wordLength);
 std::string intermidiateWordResult(std::string inputString, std::string guessWord, const int wordLength);
 std::string generateWord(const std::string WordsFile, const int WordsCount, const int wordLengt);
 void unmatchedLettersList(std::string inputString, std::string guessWord, const int wordLength, std::string& usedUnmatchLetters);
-bool checkWinCindition(std::string guessWord, std::string resultAfterGuess, const int wordLength);
+bool checkWinCondition(std::string guessWord, std::string resultAfterGuess, const int wordLength);
 void printNewRoundMenu(std::string inputString, std::string resultAfterGuess, std::string usedUnmatchLetters, int currentAttemptsCounter);
 void printWinMenu(std::string guessWord, const int maxAttempts, int currentAttemptsCounter);
-void printlossMenu(std::string guessWord);
+void printlossMenu(std::string guessWord, std::string mainModeChoise);
 void printError(std::string errors);
 std::string readSavedData(std::string saveDataToFile, readParameters parameterToRead);
 std::string getCurrentDate();
@@ -30,57 +30,58 @@ void writeSaveData(std::string date, std::string word, std::string status, const
 
 int main()
 {
-	const int usualWordsCount = 212;
-	const int wordsOfTheDayCount = 219;
-	const int wordLength = 5;
-	const int maxAttempts = 10;
+	const int usualWordsCount = 212; //number of words for usual mode, changing this requires changing number of words in data base
+	const int wordsOfTheDayCount = 219; //number of words for word of the day mode, changing this requires changing number of words in data base
+	const int wordLength = 5; //word length, changing this requires to update words data base
+	const int maxAttempts = 10; //number of attempts to guess the word
 
-	const std::string usualWordsFile = "UsualWords.txt";
-	const std::string wordOfTheDayFile = "DayWord.txt";
-	const std::string saveDataToFile = "SaveData.txt";
-
-	std::string today = getCurrentDate();
+	const std::string usualWordsFile = "UsualWords.txt"; //file with words data base
+	const std::string wordOfTheDayFile = "DayWord.txt"; //file with words data base
+	const std::string saveDataToFile = "SaveData.txt"; //file with save data
 
 	while (true)
 	{
+		std::string today = getCurrentDate(); 
+
 		printMainMenu();
 
 		std::string mainModeChoise = "";
 		std::cin >> mainModeChoise;
 		std::cin.ignore(1000, '\n');
-		std::string mainModeError = mainModeErrors(mainModeChoise);
+		std::string mainModeError = mainModeErrors(mainModeChoise); // form the eeror string
 
 
 		std::string guessWord = "";
-		std::string wordOfTheDayGuessStatus = "false";
+		std::string wordOfTheDayGuessStatus = "false"; 
 
-		if (mainModeError != "")
+		if (mainModeError != "") //if error string now empty this mean there are error and program will restart
 		{
 			printError(mainModeError);
+			continue;
 		}
 
-		else if (mainModeChoise == "0")
+		else if (mainModeChoise == "0")  // if parameter is 0 program will ends
 		{
 			return 0;
 		}
 
-		else if (mainModeChoise == "1")
+		else if (mainModeChoise == "1") //if parameter is 1 usual mode will start and generate guess word each time new
 		{
 			guessWord = generateWord(usualWordsFile, usualWordsCount, wordLength);
 			std::cout << std::endl;
 			std::cout << "!!!Usual Mode!!!";
 		}
 
-		else if (mainModeChoise == "2")
+		else if (mainModeChoise == "2") //if parameter is 2 word of the day mode will start
 		{
 			std::cout << std::endl;
 			std::cout << "!!!Word of the Day Mode!!!";
 			std::string gameDate = readSavedData(saveDataToFile, readParameters::Date);
 
-			if (gameDate == today)
+			if (gameDate == today) //check if this mode was started today
 			{
 				std::string gameStatus = readSavedData(saveDataToFile, readParameters::Status);
-				if (gameStatus == "true")
+				if (gameStatus == "true") //check if the word was guessed in case of true will print "return tomorrow" in case of false read the word to guess from file
 				{
 					std::cout << std::endl;
 					std::cout << "The Word of the day alredy guessed return tomorrow";
@@ -92,7 +93,7 @@ int main()
 					guessWord = readSavedData(saveDataToFile, readParameters::Word);
 				}
 			}
-			else
+			else //if mode was not started today then generate new word, update date, update status with false and change the word
 			{
 				
 				guessWord = generateWord(wordOfTheDayFile, wordsOfTheDayCount, wordLength);
@@ -101,15 +102,15 @@ int main()
 
 		}
 		int currentAttemptsCounter = maxAttempts;
-
+		
 		std::string usedUnmatchLetters = "";
 		printGameStartedMenu(maxAttempts);
-	
+		
 		while (true)
 		{
 			if (currentAttemptsCounter == 0)
 			{
-				printlossMenu(guessWord);
+				printlossMenu(guessWord, mainModeChoise);
 				break;
 			}
 
@@ -118,14 +119,15 @@ int main()
 			std::string inputString = "";
 			std::cin >> inputString;
 			std::cin.ignore(1000, '\n');
-			std::string gameModeError = gameModeErrors(inputString, wordLength);
+			std::string gameModeError = gameModeErrors(inputString, wordLength); //form the string with error in guessing phase
 
-			if (gameModeError != "")
+			if (gameModeError != "") // if errors present in input show the eeror message and not count as attempt
 			{
 				printError(gameModeError);
+				continue;
 			}
 
-			else if (inputString == "0")
+			else if (inputString == "0") // if input is 0 then return to main menu
 			{
 				std::cout << std::endl;
 				std::cout << "Starting Over";
@@ -137,21 +139,21 @@ int main()
 			{
 				currentAttemptsCounter--;
 
-				for (int i = 0; i < wordLength; i++)
+				for (int i = 0; i < wordLength; i++) //transform all input letters to lower case for comparison
 				{
 					inputString[i] = tolower(inputString[i]);
 				}
 
-				unmatchedLettersList(inputString, guessWord, wordLength, usedUnmatchLetters);
-				std::string resultAfterGuess = intermidiateWordResult(inputString, guessWord, wordLength);
+				unmatchedLettersList(inputString, guessWord, wordLength, usedUnmatchLetters); //fprm the list of words that not in the word
+				std::string resultAfterGuess = intermidiateWordResult(inputString, guessWord, wordLength); //create intermidiate string
 
-				bool winCondition = checkWinCindition(guessWord, resultAfterGuess, wordLength);
+				bool winCondition = checkWinCondition(guessWord, resultAfterGuess, wordLength); //check if the word is guessed
 
-				if (!winCondition)
+				if (!winCondition) //if word no guessed than printing new round menu
 				{
 					printNewRoundMenu(inputString, resultAfterGuess, usedUnmatchLetters, currentAttemptsCounter);
 				}
-				else
+				else //if word guessed print win menu and update save file with true status if mode wa word of the day
 				{
 					printWinMenu(guessWord, maxAttempts, currentAttemptsCounter);
 					if (mainModeChoise == "2")
@@ -190,7 +192,8 @@ void printGameStartedMenu(int attempts)
 std::string mainModeErrors(std::string mainModeChoise)
 {
 	std::string inputErrors = "";
-	bool inputContainsLetters = std::any_of(mainModeChoise.begin(), mainModeChoise.end(), std::isalpha);
+	
+	bool inputContainsLettersOrSpecialChar = std::any_of(mainModeChoise.begin(), mainModeChoise.end(), [](char a) {if (!std::isdigit(a)) { return true; } return false; });
 	bool lengthNotEqualOne = (mainModeChoise.length() != 1);
 	bool wrongNumber = (mainModeChoise != "0" && mainModeChoise != "1" && mainModeChoise != "2");
 
@@ -199,14 +202,14 @@ std::string mainModeErrors(std::string mainModeChoise)
 		inputErrors = " Input has wrong length ";
 	}
 
-	else if (inputContainsLetters)
+	else if (inputContainsLettersOrSpecialChar)
 	{
-		inputErrors = " Input contain letters ";
+		inputErrors = " Input contain letters or special characters ";
 	}
 
 	else if (wrongNumber)
 	{
-		inputErrors = " Wrong number ";
+		inputErrors = " Wrong control value ";
 	}
 
 	return inputErrors;
@@ -215,7 +218,7 @@ std::string mainModeErrors(std::string mainModeChoise)
 std::string gameModeErrors(std::string inputString, int wordLength)
 {
 	std::string inputErrors = "";
-	bool inputContainsDigits = std::any_of(inputString.begin(), inputString.end(), std::isdigit);
+	bool inputContainsDigitsOrSpecialChar = std::any_of(inputString.begin(), inputString.end(), [](char a) {if (!std::isalpha(a)) { return true; } return false; });
 	bool lengthNotEqualFive = (inputString.length() != wordLength);
 	bool lengthNotEqualOne = (inputString.length() != 1);
 	bool wrongNumber = (inputString != "0");
@@ -225,14 +228,19 @@ std::string gameModeErrors(std::string inputString, int wordLength)
 		inputErrors = " Input has wrong length ";
 	}
 
-	else if (inputContainsDigits && lengthNotEqualOne)
+	else if (inputContainsDigitsOrSpecialChar && lengthNotEqualOne)
 	{
-		inputErrors = " Input contain digits ";
+		inputErrors = " Input contain digits or special characters ";
 	}
 
-	else if (wrongNumber && !lengthNotEqualOne)
+	else if (wrongNumber && !lengthNotEqualOne && !inputContainsDigitsOrSpecialChar)
 	{
 		inputErrors = " Wrong control value ";
+	}
+
+	else if (wrongNumber && !lengthNotEqualOne && inputContainsDigitsOrSpecialChar)
+	{
+		inputErrors = "  Input contain digits or special characters ";
 	}
 
 	return inputErrors;
@@ -240,10 +248,10 @@ std::string gameModeErrors(std::string inputString, int wordLength)
 
 std::string generateWord(const std::string WordsFile, const int WordsCount, const int wordLengt)
 {
-	std::srand(std::time(nullptr));
+	std::srand(std::time(nullptr)); //generate random number
 	const double wordNumber = std::rand() % WordsCount;
 
-	std::fstream inputFile;
+	std::fstream inputFile; 
 	inputFile.open(WordsFile, std::ios::in);
 
 	if (!inputFile)
@@ -254,7 +262,7 @@ std::string generateWord(const std::string WordsFile, const int WordsCount, cons
 
 	std::string generatedString = "";
 
-	for (int i = 0; i < WordsCount; i++)
+	for (int i = 0; i < WordsCount; i++) //read requaired line from file
 	{
 		inputFile >> generatedString;
 		if (i == static_cast<int> (wordNumber))
@@ -271,9 +279,9 @@ std::string generateWord(const std::string WordsFile, const int WordsCount, cons
 
 std::string intermidiateWordResult(std::string inputString, std::string guessWord, const int wordLength)
 {
-	std::string resultAfterGuess(wordLength, '*');
+	std::string resultAfterGuess(wordLength, '*'); //generate string consist of *
 
-	for (int i = 0; i < wordLength; i++)
+	for (int i = 0; i < wordLength; i++) //check is there any correct letters in correct position
 	{
 		if (guessWord[i] == inputString[i])
 		{
@@ -281,7 +289,7 @@ std::string intermidiateWordResult(std::string inputString, std::string guessWor
 		}
 	}
 
-	for (int i = 0; i < wordLength; i++)
+	for (int i = 0; i < wordLength; i++) //check is there any correct letters in wrong position
 	{
 		if (!isupper(resultAfterGuess[i]))
 		{
@@ -300,7 +308,7 @@ std::string intermidiateWordResult(std::string inputString, std::string guessWor
 
 void unmatchedLettersList(std::string inputString, std::string guessWord, const int wordLength, std::string& usedUnmatchLetters)
 {
-	for (int i = 0; i < wordLength; i++)
+	for (int i = 0; i < wordLength; i++) //check if letter present in the word if not check if it already in unmatched letters string
 	{
 		char toTest = inputString[i];
 		bool toGuessStringContainsLetter = std::any_of(guessWord.begin(), guessWord.end(), [toTest](char a) {return toTest == a; });
@@ -317,7 +325,7 @@ void unmatchedLettersList(std::string inputString, std::string guessWord, const 
 	}
 }
 
-bool checkWinCindition(std::string guessWord, std::string resultAfterGuess, const int wordLength)
+bool checkWinCondition(std::string guessWord, std::string resultAfterGuess, const int wordLength)
 {
 	for (int i = 0; i < wordLength; i++)
 	{
@@ -325,11 +333,8 @@ bool checkWinCindition(std::string guessWord, std::string resultAfterGuess, cons
 		{
 			return false;
 		}
-		else if (i == wordLength - 1)
-		{
-			return true;
-		}
 	}
+	return true;
 }
 
 void printNewRoundMenu(std::string inputString, std::string resultAfterGuess, std::string usedUnmatchLetters, int currentAttemptsCounter)
@@ -349,11 +354,14 @@ void printWinMenu(std::string guessWord, const int maxAttempts, int currentAttem
 	std::cout << std::endl;
 }
 
-void printlossMenu(std::string guessWord)
+void printlossMenu(std::string guessWord, std::string mainModeChoise)
 {
 	std::cout << std::endl;
 	std::cout << "No attempts left try again" << std::endl;
-	std::cout << "The Word was " << "\"" << guessWord << "\"";
+	if (mainModeChoise=="1")
+	{
+		std::cout << "The Word was " << "\"" << guessWord << "\"";
+	}	
 	std::cout << std::endl;
 }
 
@@ -398,6 +406,7 @@ std::string readSavedData(std::string saveDataToFile, readParameters parameterTo
 		inputFile.close();
 		return stringData;
 	}
+	return "";
 }
 
 std::string getCurrentDate()
