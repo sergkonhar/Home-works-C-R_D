@@ -10,7 +10,7 @@ enum class sortDirection
 };
 
 bool findInArray(int inarray[rows][columns], int valueToFind);
-bool isSorted(int inarray[], sortDirection sort);
+bool isSorted(int inarray[], sortDirection sort, const int columns);
 void arrayPassFirstVariant(int inarray[rows][columns]);
 void arrayPassSecondVariant(int inarray[rows][columns]);
 
@@ -26,7 +26,7 @@ int main()
     sortDirection currentSort = sortDirection::Ascending;
     int sortedArray[columns]= { 1,2,3};
 
-    bool isArraySorted = isSorted(sortedArray, currentSort);
+    bool isArraySorted = isSorted(sortedArray, currentSort, columns);
     std::cout << std::boolalpha << "Array is sorted: " << isArraySorted;
     std::cout << std::endl;
 
@@ -50,7 +50,7 @@ bool findInArray(int inarray[rows][columns], int valueToFind)
     return false;
 }
 
-bool isSorted(int inarray[], sortDirection sort) 
+bool isSorted(int inarray[], sortDirection sort, const int columns)
 {
     if (sort == sortDirection::Ascending) 
     {
@@ -61,7 +61,6 @@ bool isSorted(int inarray[], sortDirection sort)
                 return false;
             }
         }
-        return true;
     }
     else if (sort == sortDirection::Descending)
     {
@@ -72,8 +71,8 @@ bool isSorted(int inarray[], sortDirection sort)
                 return false;
             }
         }
-        return true;
     }
+    return true;
 }
 
 void arrayPassFirstVariant(int inarray[rows][columns]) 
