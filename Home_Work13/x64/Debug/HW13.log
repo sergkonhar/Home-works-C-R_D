@@ -1,0 +1,3 @@
+﻿  HW13.cpp
+C:\Users\sergk\source\repos\HW13\HW13.cpp(251,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  HW13.vcxproj -> C:\Users\sergk\source\repos\Task#1\x64\Debug\HW13.exe
