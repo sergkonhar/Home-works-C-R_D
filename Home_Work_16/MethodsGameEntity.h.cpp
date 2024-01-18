@@ -3,35 +3,30 @@
 #include <iostream>
 
 weapon::weapon()
-	:m_name(""), m_damage(1), m_range(1)
+	:m_name("default"), m_damage(1), m_range(1)
 {
-	m_name = "default";
-	m_damage = 1;
-	m_range = 1;
 }
 
-weapon::weapon(std::string name, int damage, int range)
-	:m_name(""), m_damage(1), m_range(1)
+weapon::weapon(const std::string& name, int damage, int range)
+	:m_name(name), m_damage(damage), m_range(range)
 {
-	m_name = name;
-	m_damage = damage;
-	m_range = range;
+}
+
+void weapon::printWeaponInfo()
+{
+	std::cout << m_name << std::endl;
+	std::cout << "Damage: " << m_damage << std::endl;
+	std::cout << "Range: " << m_range << std::endl;
 }
 
 player::player()
-	: m_name(""), m_team("none"), m_healtPoints(100), m_playerClass(playerClass::assault)
+	: m_name("No Name"), m_team("none"), m_healtPoints(100), m_playerClass(playerClass::assault), m_activeWeapon(nullptr)
 {
-	m_name = "No Name";
-	m_activeWeapon = nullptr;
 }
 
-player::player(std::string name, int healtPoints, playerClass playerClass)
-	: m_name(""), m_team("none"), m_healtPoints(100), m_playerClass(playerClass::assault)
+player::player(const std::string& name, int healtPoints, playerClass playerClass)
+	: m_name(name), m_team("none"), m_healtPoints(healtPoints), m_playerClass(playerClass), m_activeWeapon(nullptr)
 {
-	m_name = name;
-	m_healtPoints = healtPoints;
-	m_playerClass = playerClass;
-	m_activeWeapon = nullptr;
 }
 
 player::~player()
@@ -39,7 +34,7 @@ player::~player()
 	delete m_activeWeapon;
 }
 
-void player::setTeam(std::string team)
+void player::setTeam(const std::string& team)
 {
 	m_team = team;
 }
@@ -62,7 +57,7 @@ weapon* player::getWeapon() const
 void player::printPlayerInfo() const
 {
 
-	std::string teamName = this->getTeam();
+	std::string teamName = m_team;
 
 	std::string className;
 
@@ -96,13 +91,8 @@ void player::printPlayerInfo() const
 	}
 	else
 	{
-		std::string weaponName = this->getWeapon()->m_name;
-		int damage = this->getWeapon()->m_damage;
-		int range = this->getWeapon()->m_range;
 		std::cout << "Weapon: " << std::endl;
-		std::cout << "Weapon name: " << weaponName << std::endl;
-		std::cout << "Weapon range: " << range << std::endl;
-		std::cout << "Weapon damage: " << damage << std::endl;
+		this->getWeapon()->printWeaponInfo();
 	}
 
 }
@@ -168,16 +158,17 @@ bool team::deletePlayer(player* removePlayer)
 
 void team::printTeamInfo()
 {
-	std::string teamMembers = "";
-	for (int i = 0; i < m_teamMembers.size(); i++)
-	{
-		teamMembers += m_teamMembers[i]->getName();
-		teamMembers += " ";
-	}
 	std::cout << std::endl;
 	std::cout << "Team Info" << std::endl;
 	std::cout << "Name: "<< m_name << std::endl;
 	std::cout << "Max members: " << m_maxMembers << std::endl;
-	std::cout << "Team members: " << teamMembers << std::endl;
+	std::cout << "Team members: "  << std::endl;
+	
+
+	for (int i = 0; i < m_teamMembers.size(); i++)
+	{
+		 m_teamMembers[i]->printPlayerInfo();
+		
+	}
 	std::cout << std::endl;
 }

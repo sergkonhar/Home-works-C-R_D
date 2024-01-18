@@ -15,10 +15,20 @@ Rectangle::Rectangle(float sideA, float sideB)
 
 float Rectangle::getPerimeter()
 {
-	return (2 * m_sideA + 2 * m_sideB);
+	return 2 * m_sideA + 2 * m_sideB;
 }
 
 float Rectangle::getArea()
 {
-	return (m_sideA * m_sideB);
+	return m_sideA * m_sideB;
+}
+
+float Rectangle::getSideA()
+{
+	return m_sideA;
+}
+
+float Rectangle::getSideB() 
+{
+	return m_sideB;
 }

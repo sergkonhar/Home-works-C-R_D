@@ -13,8 +13,8 @@ int main()
 	area = suqare.getArea();
 
 	std::cout << std::endl;
-	std::cout << "Square Side A : " << suqare.m_sideA << std::endl;
-	std::cout << "Square Side B : " << suqare.m_sideB << std::endl;
+	std::cout << "Square Side A : " << suqare.getSideA() << std::endl;
+	std::cout << "Square Side B : " << suqare.getSideB() << std::endl;
 	std::cout << "Square Perimeter : " << perimeter << std::endl;
 	std::cout << "Square Area : " << area << std::endl;
 	std::cout << std::endl;
@@ -25,8 +25,8 @@ int main()
 	area = rectangle.getArea();
 
 	std::cout << std::endl;
-	std::cout << "Rectangle Side A : " << rectangle.m_sideA << std::endl;
-	std::cout << "Rectangle Side B : " << rectangle.m_sideB << std::endl;
+	std::cout << "Rectangle Side A : " << rectangle.getSideA() << std::endl;
+	std::cout << "Rectangle Side B : " << rectangle.getSideB() << std::endl;
 	std::cout << "Rectangle Perimeter : " << perimeter << std::endl;
 	std::cout << "Rectangle Area : " << area << std::endl;
 	std::cout << std::endl;
@@ -37,9 +37,7 @@ int main()
 	
 	std::cout << std::endl;
 	std::cout << "Weapon of first player" << std::endl;
-	std::cout << "Name: " << frirstPlayer->getWeapon()->m_name << std::endl;
-	std::cout << "Damage: " << frirstPlayer->getWeapon()->m_damage << std::endl;
-	std::cout << "Range: " << frirstPlayer->getWeapon()->m_range << std::endl;
+	frirstPlayer->getWeapon()->printWeaponInfo();
 	std::cout << std::endl;
 
     frirstPlayer->printPlayerInfo();
