@@ -5,19 +5,16 @@
  int Vector2d::instanceCount=0;
 
 Vector2d::Vector2d() 
-	: m_X_axis(0.0), m_Y_axis(0.0)
+	: m_X_axis(10.0), m_Y_axis(10.0)
 {
-	m_X_axis = 10.0;
-	m_Y_axis = 10.0;
 	instanceCount++;
 }
 
 
 Vector2d::Vector2d(float X_axis, float Y_axis)
-	: m_X_axis(0.0), m_Y_axis(0.0)
 {
 	m_X_axis = X_axis;
-	m_Y_axis = Y_axis;
+	m_Y_axis = Y_axis;	
 	instanceCount++;
 }
 
@@ -56,24 +53,18 @@ float Vector2d::getYValue()
 
 //Vector2d& Vector2d::operator+( Vector2d& secondVector)
 //{
-//	float sumOfX = this->getXValue() + secondVector.getXValue();
-//	float sumOfY = this->getYValue() + secondVector.getYValue();
-//
-//	return *(new Vector2d(sumOfX, sumOfY));
+//	return *(new Vector2d(this->getXValue() + secondVector.getXValue(), this->getYValue() + secondVector.getYValue()));
 //}
 //
 //Vector2d& Vector2d::operator-(Vector2d& secondVector)
 //{
-//	float sumOfX = this->getXValue() - secondVector.getXValue();
-//	float sumOfY = this->getYValue() - secondVector.getYValue();
-//	
-//	return *(new Vector2d(sumOfX, sumOfY));
+//	return *(new Vector2d(this->getXValue() - secondVector.getXValue(), this->getYValue() - secondVector.getYValue()));
 //}
 
 float Vector2d::operator()()
 {
-	float xLengthPowerofTwo = std::pow(std::abs(this->getXValue()), 2);
-	float yLengthPowerofTwo = std::pow(std::abs(this->getYValue()), 2);
+	float xLengthPowerofTwo = std::pow(this->getXValue(), 2);
+	float yLengthPowerofTwo = std::pow(this->getYValue(), 2);
 
 	float vectorLegth = std::sqrt(xLengthPowerofTwo + yLengthPowerofTwo);
 
@@ -103,18 +94,12 @@ std::ostream& operator<<(std::ostream& out, Vector2d& vector)
 
 Vector2d operator+(Vector2d& firstVector, Vector2d& secondVector) 
 {
-	float sumOfX = firstVector.getXValue() + secondVector.getXValue();
-	float sumOfY = firstVector.getYValue() + secondVector.getYValue();
-
-	return *(new Vector2d(sumOfX, sumOfY));
+	return *(new Vector2d(firstVector.getXValue() + secondVector.getXValue(), firstVector.getYValue() + secondVector.getYValue());
 }
 
 Vector2d operator-(Vector2d& firstVector, Vector2d& secondVector) 
 {
-	float sumOfX = firstVector.getXValue() - secondVector.getXValue();
-	float sumOfY = firstVector.getYValue() - secondVector.getYValue();
-
-	return *(new Vector2d(sumOfX, sumOfY));
+	return *(new Vector2d(firstVector.getXValue() - secondVector.getXValue(), firstVector.getYValue() - secondVector.getYValue()));
 }
 
 void operator >>(std::istream& in, Vector2d& vector) 

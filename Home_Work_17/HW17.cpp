@@ -20,5 +20,8 @@ int main()
     std::cout << testVectorTwo() << std::endl;
 
     std::cout << "Vector 2d instances: " << Vector2d::getInstanceCount() << std::endl;
+
+    std::cout << std::endl;
+    std::cout << secondVector[1];
 }
 
