@@ -44,6 +44,13 @@ DynamicIntArray& DynamicIntArray::operator=(const DynamicIntArray& other)
 
 int& DynamicIntArray::operator[](std::size_t index) 
 {
+	if (index<0 || index>this->getSize() - 1) 
+	{
+		std::cout << "Wrong index" << std::endl;
+		int errorValue = 0;
+		return errorValue;
+	}
+
 	return m_dynamicArray[index];
 }
 
@@ -54,6 +61,12 @@ std::size_t DynamicIntArray::getSize() const
 
 void DynamicIntArray::setSize(std::size_t newSize)
 {
+	if (newSize< this->getSize())
+	{
+		std::cout << "New size is smaller than original" << std::endl;
+		return ;
+	}
+
 	int* tempArray = new int[this->getSize()];
 	
 	std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
