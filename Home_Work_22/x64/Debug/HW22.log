@@ -1,0 +1,24 @@
+﻿  ArrayMethods.cpp
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(27,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(20,1): message : while compiling class template member function 'DynamicIntArray<int>::DynamicIntArray(size_t)'
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(6,36): message : see reference to class template instantiation 'DynamicIntArray<int>' being compiled
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(60,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(54,1): message : while compiling class template member function 'DynamicIntArray<int> &DynamicIntArray<int>::operator =(DynamicIntArray<int> &)'
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(61,44): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(101,24): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(92,1): message : while compiling class template member function 'void DynamicIntArray<int>::setSize(size_t)'
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(116,24): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(117,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(146,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(132,1): message : while compiling class template member function 'void DynamicIntArray<int>::push_back(T)'
+          with
+          [
+              T=int
+          ]
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(175,28): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(158,1): message : while compiling class template member function 'void DynamicIntArray<int>::reserve(size_t)'
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(191,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(181,1): message : while compiling class template member function 'void DynamicIntArray<int>::shrinkToFit(void)'
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(206,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW22\ArrayMethods.cpp(196,1): message : while compiling class template member function 'void DynamicIntArray<int>::pop_back(void)'
+  HW22.vcxproj -> C:\Users\sergk\source\repos\Task#1\x64\Debug\HW22.exe
