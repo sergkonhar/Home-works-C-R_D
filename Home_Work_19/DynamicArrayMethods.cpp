@@ -1,6 +1,7 @@
 #include "DynamicArray.h"
 #include <iostream>
 #include <array>
+#include <algorithm>
 
 DynamicIntArray::DynamicIntArray() 
 	:m_dynamicArray(new int[0]), m_dynamicArraySize(0)
@@ -18,11 +19,8 @@ DynamicIntArray::DynamicIntArray(const DynamicIntArray& other)
 	delete[] m_dynamicArray;
 	m_dynamicArray = new int[other.getSize()];
 
-	for (int i = 0; i < other.getSize(); i++)
-	{
-		m_dynamicArray[i] = other.m_dynamicArray[i];
-	}
-
+	std::copy(other.m_dynamicArray, other.m_dynamicArray + other.getSize(), m_dynamicArray);
+		
 	m_dynamicArraySize = other.m_dynamicArraySize;
 }
 
@@ -38,10 +36,7 @@ DynamicIntArray& DynamicIntArray::operator=(const DynamicIntArray& other)
 	delete[] m_dynamicArray;
 	m_dynamicArray = new int[other.getSize()];
 
-	for (int i = 0; i < other.getSize(); i++)
-	{
-		m_dynamicArray[i] = other.m_dynamicArray[i];
-	}
+	std::copy(other.m_dynamicArray, other.m_dynamicArray + other.getSize(), m_dynamicArray);
 
 	m_dynamicArraySize = other.getSize();
 	return *this;
@@ -60,21 +55,13 @@ std::size_t DynamicIntArray::getSize() const
 void DynamicIntArray::setSize(std::size_t newSize)
 {
 	int* tempArray = new int[this->getSize()];
-
-	for (int i = 0; i < this->getSize(); i++)
-	{
-		tempArray[i] = m_dynamicArray[i];
-	}
+	
+	std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
 
 	delete[] m_dynamicArray;
 	m_dynamicArray = new int[newSize];
 
-	int tempArraySize = sizeof(*tempArray) / sizeof(int);
-
-	for (int i = 0; i < this->getSize(); i++)
-	{
-		m_dynamicArray[i] = tempArray[i];
-	}
+	std::copy(tempArray, tempArray+newSize, m_dynamicArray);
 
 	delete[] tempArray;
 	m_dynamicArraySize = newSize;
@@ -90,19 +77,13 @@ void DynamicIntArray::push_back(int element)
 {
 	int* tempArray = new int[this->getSize()];
 
-	for (int i = 0; i < this->getSize(); i++)
-	{
-		tempArray[i] = m_dynamicArray[i];
-	}
+	std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
 
 	delete[] m_dynamicArray;
 	m_dynamicArray = new int[this->getSize()+1];
 
 
-	for (int i = 0; i < this->getSize(); i++)
-	{
-		m_dynamicArray[i] = tempArray[i];
-	}
+	std::copy(tempArray, tempArray + this->getSize(), m_dynamicArray);
 
 	delete[] tempArray;
 	m_dynamicArray[this->getSize()] = element;
