@@ -1,0 +1,6 @@
+﻿  DynamicArrayMethods.cpp
+C:\Users\sergk\source\repos\HW19\DynamicArrayMethods.cpp(14,23): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW19\DynamicArrayMethods.cpp(41,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW19\DynamicArrayMethods.cpp(80,23): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sergk\source\repos\HW19\DynamicArrayMethods.cpp(51): warning C4172: returning address of local variable or temporary: errorValue
+  HW19.vcxproj -> C:\Users\sergk\source\repos\Task#1\x64\Debug\HW19.exe
