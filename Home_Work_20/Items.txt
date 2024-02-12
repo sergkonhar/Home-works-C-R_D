@@ -1,0 +1,10 @@
+Weapon;The Sword of DOOM;5
+UndeadWeapon;Stinky knife;2
+UndeadWeapon;Holy grenade;4
+ZombieSlayerWeapon;Zombie's Baine;5
+GodSlayerWeapon;Rage;2
+Weapon;Sword;7
+Weapon;Pike;1
+UndeadWeapon;Holy Ladle;1
+GodSlayerWeapon;Vishnu;10
+UndeadWeapon;Dirty Shiv;1
