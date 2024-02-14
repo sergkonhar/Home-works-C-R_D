@@ -2,35 +2,35 @@
 #include <cstdlib>
 
 template<class T>
-class DynamicIntArray
+class DynamicArray
 {
 public:
 
-    DynamicIntArray();
+    DynamicArray();
 
 
-    DynamicIntArray(std::size_t capasity);
+    DynamicArray(int capacity);
 
 
-    DynamicIntArray( DynamicIntArray& other);
+    DynamicArray( DynamicArray& other);
 
 
-    ~DynamicIntArray();
+    ~DynamicArray();
 
-    DynamicIntArray& operator=( DynamicIntArray& other);
+    DynamicArray& operator=( DynamicArray& other);
 
-    T& operator[](std::size_t index);
+    T& operator[](int index);
 
-    void setSize(std::size_t newSize);
-    std::size_t getSize() const;
+    void setSize(int newSize);
+    int getSize() const;
 
     void clear();
 
     void push_back(T element);
 
-    std::size_t getCapasity();
+    int getCapacity();
 
-    void reserve(std::size_t reservedSpace);
+    void reserve(int reservedSpace);
 
     void shrinkToFit();
 
@@ -38,11 +38,11 @@ public:
 
     T back() const;
 
-    bool operator==( DynamicIntArray& other);
+    bool operator==( DynamicArray& other);
 
 private:
 
     T* m_dynamicArray = nullptr;
     int m_dynamicArraySize;
-    int m_dynamicArrayCapasity;
+    int m_dynamicArrayCapacity;
 };

@@ -2,147 +2,124 @@
 #include <iostream>
 #include <array>
 #include <algorithm>
+#define MY_ASSERT(condition, message) \
+    if (!(condition)) { \
+        std::cerr << "Assertion failed: " << #condition << ", " << message << " in file " << __FILE__ \
+                  << " at line " << __LINE__ << std::endl; \
+        std::terminate(); \
+    }
 
-template class DynamicIntArray<int>;
+template class DynamicArray<int>;
+
+const int baseCapasity = 10;
 
 
 template<class T>
-DynamicIntArray<T>::DynamicIntArray()
-	:m_dynamicArray(new T[10]), m_dynamicArraySize(0), m_dynamicArrayCapasity(10)
+DynamicArray<T>::DynamicArray()
+	:m_dynamicArray(new T[baseCapasity]), m_dynamicArraySize(0), m_dynamicArrayCapacity(baseCapasity)
 {
 }
 
 
 
 template<class T>
-DynamicIntArray<T>::DynamicIntArray(std::size_t capasity)	
+DynamicArray<T>::DynamicArray(int capacity)	
 {
-	if (capasity <= 0)
+	if (capacity <= 0)
 	{
-		std::cout << "Wrong capasity" << std::endl;
+		std::cout << "Wrong capacity" << std::endl;
 		return;
 	}		
-	m_dynamicArray = new T[capasity];
-	m_dynamicArrayCapasity = capasity;
+	m_dynamicArray = new T[capacity];
+	m_dynamicArrayCapacity = capacity;
 	m_dynamicArraySize = 0;
 }
 
 
 template<class T>
-DynamicIntArray<T>::DynamicIntArray( DynamicIntArray<T>& other)
+DynamicArray<T>::DynamicArray( DynamicArray<T>& other)
 {
-	delete[] m_dynamicArray;
-	m_dynamicArray = new T[other.getCapasity()];
+	m_dynamicArray = new T[other.getCapacity()];
 
 	std::copy(other.m_dynamicArray, other.m_dynamicArray + other.getSize(), m_dynamicArray);
 
 	m_dynamicArraySize = other.m_dynamicArraySize;
-	m_dynamicArrayCapasity = other.m_dynamicArrayCapasity;
+	m_dynamicArrayCapacity = other.m_dynamicArrayCapacity;
 }
 
 template<class T>
-DynamicIntArray<T>::~DynamicIntArray()
+DynamicArray<T>::~DynamicArray()
 {
 	delete[] m_dynamicArray;
 	m_dynamicArraySize = 0;
-	m_dynamicArrayCapasity = 0;
+	m_dynamicArrayCapacity = 0;
 }
 
 template<class T>
-DynamicIntArray<T>& DynamicIntArray<T>::operator=(DynamicIntArray<T>& other)
+DynamicArray<T>& DynamicArray<T>::operator=(DynamicArray<T>& other)
 {
 	delete[] m_dynamicArray;
-	m_dynamicArray = new int[other.getCapasity()];
+	m_dynamicArray = new int[other.getCapacity()];
 
 	std::copy(other.m_dynamicArray, other.m_dynamicArray + other.getSize(), m_dynamicArray);
 
 	m_dynamicArraySize = other.getSize();
-	m_dynamicArrayCapasity = other.getCapasity();
+	m_dynamicArrayCapacity = other.getCapacity();
 	return *this;
 }
 
 template<class T>
-T& DynamicIntArray<T>::operator[](std::size_t index)
-{
-	if (index<0 || index>this->getSize() - 1)
-	{
-		std::cout << "Wrong index" << std::endl;
-		static T defaultElement = 0;
-		return defaultElement;
-	}
-
+T& DynamicArray<T>::operator[](int index)
+{		
+	MY_ASSERT(index>0 || index<this->getSize() - 1, "Wrong index")
+			
 	return m_dynamicArray[index];
 }
 
 template<class T>
-std::size_t DynamicIntArray<T>::getCapasity()
+int DynamicArray<T>::getCapacity()
 {
-	return m_dynamicArrayCapasity;
+	return m_dynamicArrayCapacity;
 }
 
 template<class T>
-std::size_t DynamicIntArray<T>::getSize() const
+int DynamicArray<T>::getSize() const
 {
 	return m_dynamicArraySize;
 }
 
 template<class T>
-void DynamicIntArray<T>::setSize(std::size_t size)
+void DynamicArray<T>::setSize(int size)
 {
-	if (size < this->getSize())
-	{
-		std::cout << "New size is smaller than original" << std::endl;
-		return;
-	}
+	MY_ASSERT(size>=0, "Wrong size")
 
-	else if (size < m_dynamicArrayCapasity)
-	{
-		m_dynamicArraySize = size;
-	}
-
-	else
-	{
-		T* tempArray = new T[this->getCapasity()];
-
-		std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
-
-		delete[] m_dynamicArray;
-		m_dynamicArray = new T[size + 10];
-
-		std::copy(tempArray, tempArray + size, m_dynamicArray);
-
-		delete[] tempArray;
-		m_dynamicArraySize = size;
-		m_dynamicArrayCapasity = size + 10;
-	}
+	m_dynamicArraySize = size;
 }
 
 template<class T>
-void DynamicIntArray<T>::clear()
+void DynamicArray<T>::clear()
 {
 	delete[] m_dynamicArray;
-	m_dynamicArray = new T[10];
+	m_dynamicArray = new T[baseCapasity];
 	m_dynamicArraySize = 0;
-	m_dynamicArrayCapasity = 10;
+	m_dynamicArrayCapacity = baseCapasity;
 }
 
 template<class T>
-void DynamicIntArray<T>::push_back(T element)
+void DynamicArray<T>::push_back(T element)
 {
-	if (this->getSize() + 1 <= this->getCapasity()) 
+	if (this->getSize() + 1 <= this->getCapacity()) 
 	{
-		T* tempArray = new T[this->getSize()];
+		T* tempArray = new T[(this->getSize() + 1) + baseCapasity];
 		std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
 
 		delete[] m_dynamicArray;
-		m_dynamicArray = new T[(this->getSize() + 1)+10];
-
-		std::copy(tempArray, tempArray + this->getSize(), m_dynamicArray);
-		delete[] tempArray;
+		m_dynamicArray = tempArray;
 
 		m_dynamicArray[this->getSize()] = element;
 		m_dynamicArraySize += 1;
-		m_dynamicArrayCapasity = (this->getSize() + 1) + 10;
+		m_dynamicArrayCapacity = (this->getSize() + 1) + baseCapasity;
+
 	}
 
 	else 
@@ -153,68 +130,56 @@ void DynamicIntArray<T>::push_back(T element)
 }
 
 template<class T>
-void DynamicIntArray<T>::reserve(std::size_t reservedSpace) 
+void DynamicArray<T>::reserve(int reservedSpace) 
 {
-	if (reservedSpace >= m_dynamicArrayCapasity) 
-	{
-		std::cout << "New capasity lesser or equal to current capasity" << std::endl;
-	}
 
-	else 
-	{
-		T* tempArray = new T[this->getSize()];
-		std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
+	MY_ASSERT(reservedSpace >= m_dynamicArrayCapacity, "New reserve lesser than current")
 
-		delete[] m_dynamicArray;
-		m_dynamicArray = new T[reservedSpace];
+		T* tempArray = new T[reservedSpace];
+	std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
 
-		std::copy(tempArray, tempArray + this->getSize(), m_dynamicArray);
-		delete[] tempArray;
+	delete[] m_dynamicArray;
+	m_dynamicArray = tempArray;
 
-		m_dynamicArrayCapasity = reservedSpace;
-	}
+	m_dynamicArrayCapacity = reservedSpace;
+	
 }
 
 template<class T>
-void DynamicIntArray<T>::shrinkToFit()
+void DynamicArray<T>::shrinkToFit()
 {
 	T* tempArray = new T[this->getSize()];
 	std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
 
 	delete[] m_dynamicArray;
-	m_dynamicArray = new T[this->getSize()];
+	m_dynamicArray = tempArray;
 
-	std::copy(tempArray, tempArray + this->getSize(), m_dynamicArray);
-	delete[] tempArray;
-
-	m_dynamicArrayCapasity = this->getSize();
+	m_dynamicArrayCapacity = this->getSize();
 }
 
 template<class T>
-void DynamicIntArray<T>::pop_back()
+void DynamicArray<T>::pop_back()
 {
-	T* tempArray = new T[this->getSize()];
-	std::copy(m_dynamicArray, m_dynamicArray + this->getSize(), tempArray);
+	T* tempArray = new T[this->getCapacity()];
+	std::copy(m_dynamicArray, m_dynamicArray + this->getSize()-2, tempArray);
 
 	delete[] m_dynamicArray;
-	m_dynamicArray = new T[this->getCapasity()];
+	m_dynamicArray = tempArray;
 
-	std::copy(tempArray, tempArray + this->getSize()-2, m_dynamicArray);
-	delete[] tempArray;
-
-	m_dynamicArraySize = this->getSize()-2;
+	m_dynamicArraySize = this->getSize() - 1;
 }
 
 template<class T>
-T DynamicIntArray<T>::back() const
+T DynamicArray<T>::back() const
 {
+	MY_ASSERT(this->getSize() > 0, "Size is 0")
 	return m_dynamicArray[this->getSize() - 1];
 }
 
 template<class T>
-bool DynamicIntArray<T>::operator==( DynamicIntArray<T>& other) 
+bool DynamicArray<T>::operator==( DynamicArray<T>& other) 
 {
-	if (this->getSize() != other.getSize() || this->getCapasity() != other.getCapasity()) 
+	if (this->getSize() != other.getSize() || this->getCapacity() != other.getCapacity()) 
 	{
 		return false;
 	}

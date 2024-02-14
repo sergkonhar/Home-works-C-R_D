@@ -3,8 +3,8 @@
 
 int main()
 {
-    DynamicIntArray<int> testArray;
-    DynamicIntArray<int> testArray1;
+    DynamicArray<int> testArray;
+    DynamicArray<int> testArray1;
     testArray.push_back(11);
     testArray.push_back(12);
     testArray.push_back(77);
@@ -16,7 +16,8 @@ int main()
     std::cout << "Size: " << testArray.getSize() << std::endl;
 
     testArray1 = testArray;
-
+    
+    testArray1.reserve(100);
     std::cout << std::endl;
     std::cout << testArray1[0] << std::endl;
     std::cout << testArray1[1] << std::endl;
