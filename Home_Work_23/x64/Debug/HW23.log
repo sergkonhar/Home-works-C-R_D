@@ -1,0 +1,6 @@
+﻿  HW23.cpp
+C:\Users\sergk\source\repos\HW23\HW23.cpp(71,14): warning C4858: discarding return value: The 'remove' and 'remove_if' algorithms return the iterator past the last element that should be kept. You need to call container.erase(result, container.end()) afterwards. In C++20, 'std::erase' and 'std::erase_if' are simpler replacements for these two steps.
+C:\Users\sergk\source\repos\HW23\HW23.cpp(76,25): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\sergk\source\repos\HW23\HW23.cpp(89,14): warning C4858: discarding return value: The 'remove' and 'remove_if' algorithms return the iterator past the last element that should be kept. You need to call container.erase(result, container.end()) afterwards. In C++20, 'std::erase' and 'std::erase_if' are simpler replacements for these two steps.
+C:\Users\sergk\source\repos\HW23\HW23.cpp(154,25): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+  HW23.vcxproj -> C:\Users\sergk\source\repos\Task#1\x64\Debug\HW23.exe
