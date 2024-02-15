@@ -1,0 +1,3 @@
+﻿  HW26.cpp
+C:\Users\sergk\source\repos\HW26\HW26.cpp(104): warning C4715: 'vectorPositionString': not all control paths return a value
+  HW26.vcxproj -> C:\Users\sergk\source\repos\Task#1\x64\Debug\HW26.exe
