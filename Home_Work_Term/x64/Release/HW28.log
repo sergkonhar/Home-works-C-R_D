@@ -1,0 +1,12 @@
+﻿  HW28.cpp
+sfml-window-s.lib(WglContext.obj) : error LNK2001: unresolved external symbol __imp_wglCreateContext
+sfml-window-s.lib(WglContext.obj) : error LNK2001: unresolved external symbol __imp_wglDeleteContext
+sfml-window-s.lib(WglContext.obj) : error LNK2001: unresolved external symbol __imp_wglGetProcAddress
+sfml-window-s.lib(WglContext.obj) : error LNK2001: unresolved external symbol __imp_wglMakeCurrent
+sfml-window-s.lib(WglContext.obj) : error LNK2001: unresolved external symbol __imp_wglShareLists
+sfml-window-s.lib(JoystickImpl.obj) : error LNK2001: unresolved external symbol __imp_joyGetPosEx
+sfml-window-s.lib(JoystickImpl.obj) : error LNK2001: unresolved external symbol __imp_joyGetDevCapsW
+sfml-system-s.lib(SleepImpl.obj) : error LNK2001: unresolved external symbol __imp_timeGetDevCaps
+sfml-system-s.lib(SleepImpl.obj) : error LNK2001: unresolved external symbol __imp_timeBeginPeriod
+sfml-system-s.lib(SleepImpl.obj) : error LNK2001: unresolved external symbol __imp_timeEndPeriod
+C:\Users\sergk\source\repos\Task#1\x64\Release\HW28.exe : fatal error LNK1120: 10 unresolved externals
