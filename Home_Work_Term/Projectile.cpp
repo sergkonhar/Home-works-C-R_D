@@ -9,6 +9,7 @@ SingleGreen::SingleGreen()
 	m_beam.setOrigin(bounds.width / 2.f, bounds.height);
 
 	m_speed = 0.2f;
+	m_active = true;
 }
 
 void SingleGreen::setInitialPosition(float x, float y)
@@ -23,7 +24,11 @@ void SingleGreen::fly()
 
 void SingleGreen::draw(sf::RenderWindow& window)
 {
-	window.draw(m_beam);
+	if (m_active) 
+	{
+		window.draw(m_beam);
+	}
+	
 }
 
 bool SingleGreen::notOnTheScreen()
@@ -36,7 +41,18 @@ bool SingleGreen::notOnTheScreen()
 	return false;
 }
 
-void SingleGreen::getCollision()
+sf::Sprite* SingleGreen::getSprite() 
 {
+	return &m_beam;
+}
 
+
+bool SingleGreen::getActivityStatus() 
+{
+	return m_active;
+}
+
+void SingleGreen::setInactive() 
+{
+	m_active = false;
 }

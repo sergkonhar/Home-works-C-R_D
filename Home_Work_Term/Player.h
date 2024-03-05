@@ -33,6 +33,7 @@ public:
     int getCurrentHP();
     int getMaxHP();
    
+    sf::Sprite* getSprite();
 
 private:
     sf::Texture m_ship;
@@ -40,7 +41,7 @@ private:
     sf::Sprite m_sprite;
     sf::Sprite m_spriteThrusterLeft;
     sf::Sprite m_spriteThrusterRigth;
-    float m_movementSpeed = 0.1f; 
+    float m_movementSpeed = 0.2f; 
 
     Weapon* m_weapon;
 
@@ -51,4 +52,6 @@ private:
     int m_healthCurrent;
     int m_healthMax;
     int m_score;
+
+    bool destried;
 };

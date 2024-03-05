@@ -1,7 +1,3 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (HW28.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  InGameHUD.cpp
-C:\Users\sergk\source\repos\HW28\InGameHUD.cpp(23,37): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\sergk\source\repos\HW28\InGameHUD.cpp(28,55): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\sergk\source\repos\HW28\InGameHUD.cpp(28,39): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\sergk\source\repos\HW28\InGameHUD.cpp(45,47): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  GameOver.cpp
   HW28.vcxproj -> C:\Users\sergk\source\repos\Task#1\x64\Debug\Term.exe

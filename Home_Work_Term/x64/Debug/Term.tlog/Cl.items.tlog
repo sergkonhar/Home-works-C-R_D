@@ -3,6 +3,9 @@ C:\Users\sergk\source\repos\HW28\Game.cpp;C:\Users\sergk\source\repos\HW28\x64\D
 C:\Users\sergk\source\repos\HW28\PauseMenu.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\PauseMenu.obj
 C:\Users\sergk\source\repos\HW28\Projectile.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\Projectile.obj
 C:\Users\sergk\source\repos\HW28\InGameHUD.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\InGameHUD.obj
+C:\Users\sergk\source\repos\HW28\Enemy.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\Enemy.obj
+C:\Users\sergk\source\repos\HW28\Explode.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\Explode.obj
+C:\Users\sergk\source\repos\HW28\GameOver.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\GameOver.obj
 C:\Users\sergk\source\repos\HW28\Weapon.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\Weapon.obj
 C:\Users\sergk\source\repos\HW28\Stars.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\Stars.obj
 C:\Users\sergk\source\repos\HW28\Term.cpp;C:\Users\sergk\source\repos\HW28\x64\Debug\Term.obj

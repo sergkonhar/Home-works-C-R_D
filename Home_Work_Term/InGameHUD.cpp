@@ -1,5 +1,6 @@
 #include "InGameHUD.h"
 #include <iostream>
+#include <string>
 
 HUD::HUD()
 {
@@ -11,6 +12,7 @@ HUD::HUD()
 	m_HP_text.setFont(m_font);
 	m_scoreText.setFont(m_font);
 	m_controlText.setFont(m_font);
+	m_currentScore.setFont(m_font);
 
 	m_HP_text.setString("HP");
 	m_HP_text.setCharacterSize(30);
@@ -26,6 +28,11 @@ HUD::HUD()
 	m_controlText.setCharacterSize(20);
 	m_controlText.setOrigin(m_controlText.getLocalBounds().width / 2.f, m_controlText.getLocalBounds().height / 2.f);
 	m_controlText.setPosition(screenWidth/2, screenHeight-100);
+
+	m_currentScore.setString("000000000");
+	m_currentScore.setCharacterSize(20);
+	m_currentScore.setOrigin(m_controlText.getLocalBounds().width / 2.f, m_controlText.getLocalBounds().height / 2.f);
+	m_currentScore.setPosition(screenWidth+90, 56);
 
 	m_HP_texture.loadFromFile("HP.png");
 	m_HP_sprite.setTexture(m_HP_texture);
@@ -48,8 +55,9 @@ HUD::HUD()
 	m_HPInitialPositionY = 58.f;
 	m_HPOffsetX = 40.f;
 
-	m_LastUpdated_MaxHP =0;
-	m_LastUpdated_CurrentHP=0;
+	m_LastUpdated_MaxHP = 0;
+	m_LastUpdated_CurrentHP = 0;
+	m_lastUpdatedScore = 0;
 }
 
 void HUD::updateHP(playerSpaceShip& player)
@@ -81,6 +89,25 @@ void HUD::updateHP(playerSpaceShip& player)
 	
 }
 
+void HUD::updateScore(playerSpaceShip& player)
+{
+	int currentScore = player.getScore();
+	
+	if (currentScore != m_lastUpdatedScore)
+	{
+		std::string scoreString = std::to_string(currentScore);
+		while (scoreString.length() < 9) 
+		{
+			scoreString = "0" + scoreString;
+		}
+
+		m_lastUpdatedScore = currentScore;
+
+		m_currentScore.setString(scoreString);
+	}
+}
+
+
 
 void HUD::draw(sf::RenderWindow& window)
 {
@@ -99,6 +126,7 @@ void HUD::draw(sf::RenderWindow& window)
 	}
 
 	window.draw(m_Score_frame_sprite);
+	window.draw(m_currentScore);
 	
 }
 

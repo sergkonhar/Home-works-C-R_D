@@ -36,6 +36,8 @@ playerSpaceShip::playerSpaceShip()
     m_healthCurrent = 3;
     m_healthMax = 5;
     m_score = 0;
+
+    destried = false;
 }
 
 void playerSpaceShip::handleMove()
@@ -146,4 +148,35 @@ int playerSpaceShip::getMaxHP()
 {
     return m_healthMax;
 
+}
+
+void playerSpaceShip::setScore(int score)
+{
+    m_score += score;
+}
+
+int playerSpaceShip::getScore()
+{
+    return m_score;
+}
+
+void playerSpaceShip::decreaseHP()
+{
+    if (m_healthCurrent>0)
+    {
+        m_healthCurrent -= 1;
+    }
+}
+
+void playerSpaceShip::increaseHP()
+{
+    if (m_healthCurrent < m_healthMax) 
+    {
+        m_healthCurrent += 1;
+    }
+}
+
+sf::Sprite* playerSpaceShip::getSprite()
+{
+    return &m_sprite;
 }

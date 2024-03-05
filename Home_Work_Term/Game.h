@@ -7,6 +7,8 @@
 #include"Projectile.h"
 #include <vector>
 #include "InGameHUD.h"
+#include "Enemy.h"
+#include "GameOver.h"
 
 class Game 
 {
@@ -18,7 +20,10 @@ public:
 	void setplayersProjectiles(Projectile* playersProjectile);
 	void processPlayersProjectileFly();
 	void draw(sf::RenderWindow& window);
+	void generateEnemy();
+	void processEnemyFly();
 
+	void processGlobalColissions(playerSpaceShip& player, sf::RenderWindow& window);
 
 private:
 	playerSpaceShip m_playerSpaceShip;
@@ -28,4 +33,9 @@ private:
 	PauseMenu m_PauseMenu;
 	std::vector<Projectile*> m_playersProjectiles;
 	HUD m_inGameHud;
+	std::vector<enemySpaceShip*> m_enemyShips;
+
+	int smallShipSpawnPeriod_Cycles;
+	int smallShipSpawnCyclesPassed;
+	GameOver gameOverMenu;
 };

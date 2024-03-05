@@ -18,6 +18,14 @@ mainMenu::mainMenu()
 	m_menuExitGame.setStyle(sf::Text::Bold);
 	m_menuExitGame.setPosition(800, 370);
 
+	m_title.setString("Pew-Pew Master");
+	m_title.setFont(m_font);
+	m_title.setCharacterSize(80);
+	m_title.setFillColor(sf::Color::Green);
+	m_title.setStyle(sf::Text::Bold);
+	m_title.setPosition(650, 100);
+
+
 	m_backgroundTexture.loadFromFile("mainMenuBack.jpg");
 	m_backgroundSprite.setTexture(m_backgroundTexture);
 	
@@ -56,6 +64,7 @@ void mainMenu::draw(sf::RenderWindow& window)
 	window.draw(m_backgroundSprite);
 	window.draw(m_menuStartGame);
 	window.draw(m_menuExitGame);
+	window.draw(m_title);
 }
 
 

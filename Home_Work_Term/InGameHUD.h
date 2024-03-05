@@ -11,6 +11,7 @@ public:
 	HUD();
 
 	void updateHP(playerSpaceShip& player);
+	void updateScore(playerSpaceShip& player);
 	void draw(sf::RenderWindow& window);
 
 private:
@@ -18,6 +19,8 @@ private:
 	sf::Text m_HP_text;
 	sf::Text m_scoreText;
 	sf::Text m_controlText;
+	sf::Text m_currentScore;
+	
 
 	sf::Texture m_HP_texture;
 	sf::Sprite m_HP_sprite;
@@ -37,4 +40,6 @@ private:
 
 	int m_LastUpdated_MaxHP;
 	int m_LastUpdated_CurrentHP;
+
+	int m_lastUpdatedScore;
 };

@@ -139,6 +139,9 @@
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="InGameHUD.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Explode.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Stars.cpp" />
     <ClCompile Include="Term.cpp" />
@@ -146,6 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Explode.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="InGameHUD.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Weapon.h" />
