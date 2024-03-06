@@ -17,8 +17,4 @@
 Простые анимации
 Проигрыш
 
-![](https://github.com/sergkonhar/Home-works-C-R_D/blob/Home_Work_Term/Home_Work_Term/Screen1.png)
-![](https://github.com/sergkonhar/Home-works-C-R_D/blob/Home_Work_Term/Home_Work_Term/Screen2.png)
-![](https://github.com/sergkonhar/Home-works-C-R_D/blob/Home_Work_Term/Home_Work_Term/Screen3.png)
-![](https://github.com/sergkonhar/Home-works-C-R_D/blob/Home_Work_Term/Home_Work_Term/Screen4.png)
-![](https://github.com/sergkonhar/Home-works-C-R_D/blob/Home_Work_Term/Home_Work_Term/Screen5.png)
+

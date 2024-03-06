@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Projectile.h"
+#include <SFML/Audio.hpp>
 
 class playerSpaceShip;
 
@@ -39,6 +40,10 @@ public:
 
 private:
 	Projectile* m_ShootProjectile;
+	sf::Music m_shootSound;
 };
+
+
+
 
 

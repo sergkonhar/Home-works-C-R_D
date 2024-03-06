@@ -9,6 +9,8 @@
 #include "InGameHUD.h"
 #include "Enemy.h"
 #include "GameOver.h"
+#include <SFML/Audio.hpp>
+
 
 class Game 
 {
@@ -38,4 +40,8 @@ private:
 	int smallShipSpawnPeriod_Cycles;
 	int smallShipSpawnCyclesPassed;
 	GameOver gameOverMenu;
+	sf::Music m_battleMusic;
+	sf::Music m_GameOver;
 };
+
+

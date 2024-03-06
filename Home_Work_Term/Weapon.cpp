@@ -11,11 +11,15 @@ GreenLaser::GreenLaser()
 
 	sf::FloatRect bounds = m_blinkSprite.getLocalBounds();
 	m_blinkSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+	
+	m_shootSound.openFromFile("shoot.wav");
+	m_shootSound.setLoop(false);
 }
 
 
 Projectile* GreenLaser::shoot(playerSpaceShip& playerShip)
 {
+	m_shootSound.play();
 	setBlinkposition(playerShip);
 	m_ShootProjectile = new SingleGreen;
 
@@ -39,4 +43,5 @@ void GreenLaser::draw(sf::RenderWindow& window)
 {
 	window.draw(m_blinkSprite);
 }
+
 

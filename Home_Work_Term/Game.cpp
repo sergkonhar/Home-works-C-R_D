@@ -11,6 +11,15 @@ Game::Game()
 
 	smallShipSpawnPeriod_Cycles = 5000;
 	smallShipSpawnCyclesPassed = 0;
+
+	m_battleMusic.openFromFile("battleMusic.wav");
+	m_battleMusic.setLoop(true);
+	m_battleMusic.setVolume(50);
+
+	m_GameOver.openFromFile("gameover.wav");
+	m_GameOver.setLoop(false);
+	m_GameOver.setVolume(50);
+
 }
 
 void Game::setplayersProjectiles(Projectile* playersProjectile)
@@ -140,7 +149,6 @@ void Game::processGlobalColissions(playerSpaceShip& player, sf::RenderWindow& wi
 									m_enemyShips[j]->instantDestruction(player);
 									player.decreaseHP();
 
-									std::cout << player.getCurrentHP() << std::endl;
 								}
 							}
 						}
@@ -175,6 +183,7 @@ void Game::processGlobalColissions(playerSpaceShip& player, sf::RenderWindow& wi
 
 void Game::Run(sf::Event& event, sf::RenderWindow& window)
 {
+	m_battleMusic.play();
 	pauseMenyState pauseState;
 	pauseState = pauseMenyState::None;
 
@@ -223,10 +232,15 @@ void Game::Run(sf::Event& event, sf::RenderWindow& window)
 
 		if (m_playerSpaceShip.getCurrentHP()<=0)
 		{
+			m_battleMusic.stop();
+
+			m_GameOver.play();
 			pauseState = gameOverMenu.processMenu(event, window, m_playerSpaceShip.getScore());
+			m_GameOver.stop();
 		}
 	}
 }
+
 
 
 

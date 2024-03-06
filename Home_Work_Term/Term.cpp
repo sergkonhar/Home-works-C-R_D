@@ -4,11 +4,17 @@
 #include "Player.h"
 #include "Game.h"
 #include <iostream>
+#include <SFML/Audio.hpp>
 
 int main()
 {
 	sf::RenderWindow mainWindow(sf::VideoMode::getDesktopMode(), "Game");
-	
+	sf::Music musicMainMenu;
+	musicMainMenu.openFromFile("musicMainMenu.wav");
+	musicMainMenu.setLoop(true);
+	musicMainMenu.setVolume(50);
+	musicMainMenu.play();
+
 	mainMenu startMenu;
 	sf::Event event;
 
@@ -30,9 +36,10 @@ int main()
 
 			else if (startMenu.inputHandler(event) == menuState::startGame)
 			{
+				musicMainMenu.stop();
 				Game game;
 				game.Run(event, mainWindow);
-					
+				musicMainMenu.play();
 			}
 		}
 

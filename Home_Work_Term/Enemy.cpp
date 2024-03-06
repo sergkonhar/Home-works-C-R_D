@@ -31,6 +31,7 @@ void enemySpaceShip::decreaseHP(playerSpaceShip& player)
 	{
 		if (m_currentHP <= 0)
 		{
+			m_explosionSound.play();
 			m_destroyed = true;
 			player.setScore(m_scoreForDestruction);
 			setExplotionPosition();
@@ -46,6 +47,7 @@ void enemySpaceShip::instantDestruction(playerSpaceShip& player)
 	{
 		if (m_currentHP <= 0)
 		{
+			m_explosionSound.play();
 			m_destroyed = true;
 			player.setScore(m_scoreForDestruction);
 			setExplotionPosition();
@@ -99,6 +101,8 @@ smallFastShip::smallFastShip()
 	m_scoreForDestruction = 100;
 
 	m_destroyed = false;
+	m_explosionSound.openFromFile("explosion.wav");
+	m_explosionSound.setLoop(false);
 }
 
 void smallFastShip::draw(sf::RenderWindow& window) 
@@ -118,3 +122,6 @@ sf::Sprite* smallFastShip::getSprite()
 {
 	return &m_sprite;
 }
+
+
+

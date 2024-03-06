@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Explode.h"
+#include <SFML/Audio.hpp>
 
 
 class playerSpaceShip;
@@ -38,6 +39,8 @@ protected:
    Explode m_explodeEnemy;
 
    bool m_explotionDraw;
+
+   sf::Music m_explosionSound;
 };
 
 class smallFastShip : public enemySpaceShip 
